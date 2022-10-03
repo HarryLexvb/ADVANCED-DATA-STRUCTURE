@@ -1,0 +1,6 @@
+# ninja log v5
+1	1610	6865153850509083	CMakeFiles/R_tree_v1.dir/main.cpp.obj	661b011c8db3f9e
+1313	1615	6865155491072525	R_tree_v1.exe	fe62f167a15d2b23
+1	1308	6865155488049820	CMakeFiles/R_tree_v1.dir/test.cpp.obj	7a14b2081eb701ff
+1	1376	6865155796812989	CMakeFiles/R_tree_v1.dir/main.cpp.obj	661b011c8db3f9e
+1380	1617	6865155799178054	R_tree_v1.exe	50ad089c0c1740aa
