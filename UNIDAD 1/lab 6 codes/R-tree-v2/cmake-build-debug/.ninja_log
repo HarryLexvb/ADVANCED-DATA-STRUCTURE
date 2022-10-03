@@ -1,0 +1,4 @@
+# ninja log v5
+2	382	6865167831211846	build.ninja	e4c9eb37ec1be631
+1	1252	6865167845425128	CMakeFiles/R_tree_v2.dir/test-harness.cpp.obj	5991158da1f6342e
+1256	1566	6865167848518684	R_tree_v2.exe	548f0bf6f808e029
