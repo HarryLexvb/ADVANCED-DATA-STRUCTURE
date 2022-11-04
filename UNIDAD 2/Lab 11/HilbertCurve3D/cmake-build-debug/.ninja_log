@@ -1,0 +1,4 @@
+# ninja log v5
+1	1607	6892797275880976	CMakeFiles/HilbertCurve3D.dir/main.cpp.obj	4c3ec6f05fd23a2f
+7	1626	6892797276122287	CMakeFiles/HilbertCurve3D.dir/hilbert.cpp.obj	e0b8a35f6aea398a
+1627	2008	6892797279879853	HilbertCurve3D.exe	47423475d35af53a
