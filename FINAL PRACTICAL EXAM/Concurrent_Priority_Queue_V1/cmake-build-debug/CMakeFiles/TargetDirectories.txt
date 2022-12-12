@@ -1,3 +1,0 @@
-C:/Users/win 10/Documents/CLION/Concurrent_Priority_Queue_V1/cmake-build-debug/CMakeFiles/Concurrent_Priority_Queue_V1.dir
-C:/Users/win 10/Documents/CLION/Concurrent_Priority_Queue_V1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/win 10/Documents/CLION/Concurrent_Priority_Queue_V1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
