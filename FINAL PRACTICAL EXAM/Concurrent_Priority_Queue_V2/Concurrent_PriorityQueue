@@ -1,0 +1,77 @@
+//
+// Created by HarryLex on 9/12/2022.
+//
+
+#ifndef CONCURRENT_PRIORITY_QUEUE_V2_CONCURRENT_PRIORITYQUEUE_
+#define CONCURRENT_PRIORITY_QUEUE_V2_CONCURRENT_PRIORITYQUEUE_
+
+#include <iostream>
+#include <atomic>
+#include "Lock_Free_SkipList.h"
+
+//safe concurrent priority queue based on skip list implementation
+template <typename K, typename T, class Container = SkipList<K,T>>  //template: key, value, container (skip list) type
+class Concurrent_PriorityQueue
+{
+public:
+    Concurrent_PriorityQueue() = default;                                              //default constructor
+    Concurrent_PriorityQueue(const Concurrent_PriorityQueue&) = delete;               //copy constructor
+    Concurrent_PriorityQueue& operator=(const Concurrent_PriorityQueue&) = delete;    //copy assignment
+    Concurrent_PriorityQueue(Concurrent_PriorityQueue&&) = delete;                    //move constructor
+    Concurrent_PriorityQueue& operator=(Concurrent_PriorityQueue&&) = delete;         //move assignment
+    ~Concurrent_PriorityQueue() = default;                                             //destructor
+
+    void push(const K& key, const T& value){
+        m_queue.insert(key, value);                                                         //push value
+    }
+
+    /*
+     push() function with move semantics for key and value parameters (faster)
+     move semantics: https://en.cppreference.com/w/cpp/language/move_constructor
+     move semantics is a way to transfer ownership of a resource from one object to another without copying it (faster)
+     */
+    void push(K&& key, T&& value){
+        m_queue.insert(std::move(key), std::move(value));                                             //push value
+    }
+    /*
+     try_pop() returns true if the queue is not empty and the top element is popped into value and false otherwise (queue is empty)
+     */
+    bool try_pop(T& value){
+        if (m_queue.empty())                                                       //if queue is empty
+            return false;                                                          //return false
+        value = std::move(m_queue.top());                                          //move top element to value
+        m_queue.pop();                                                             //pop top element
+        return true;                                                               //return true
+    }
+    std::shared_ptr<T> try_pop(){
+        if (m_queue.empty())                                                       //if queue is empty
+            return std::shared_ptr<T>();                                           //return empty shared pointer
+        std::shared_ptr<T> res(std::make_shared<T>(m_queue.top()));          //create shared pointer to top element
+        m_queue.pop();                                                            //pop top element
+        return res;                                                               //return shared pointer
+    }
+    bool empty() const{
+        return m_queue.empty();                                                //return true if queue is empty
+    }
+    size_t size() const{
+        return m_queue.size();                                               //return size of queue
+    }
+    T& top(){
+        return m_queue.Top();                                            //return top element
+    }
+    void print(){
+        while (!empty()){               //while queue is not empty
+            std::cout << top() << " ";  //print top element
+            try_pop();                  //pop top element
+        }
+    }
+    void print2(){
+        m_queue.print();               //print skip list
+    }
+
+private:
+    Container m_queue;                 //skip list
+
+};
+
+#endif //CONCURRENT_PRIORITY_QUEUE_V2_CONCURRENT_PRIORITYQUEUE_
