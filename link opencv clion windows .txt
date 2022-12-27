@@ -1,0 +1,60 @@
+primera opción:
+descargar opencv GitHub: https://github.com/opencv/opencv 
+
+referencias:https://github.com/Ethernel0/CmakeList-OpenCV
+
+segunda opción (recomendado): 
+1. primero instala chocolatey siguiendo estos pasos: https://docs.chocolatey.org/en-us/choco/setup
+
+2. descargar opencv de chocolatey con el comando:  choco install opencv (lo pones en un cmd como administrador)
+
+3. abre las variables de entorno y en el variables de usuario te diriges a path y pegas la ruta del C:\tools\opencv\build\x64\vc15\bin
+
+4. en variables del sistema creas lo sigueinte: 
+	OPENCV_DIR            | C:\tools\opencv\build\x64\vc14\lib
+	OPENCV_INCLUDE_PATHS  | C:\tools\opencv\build\include
+	OPENCV_LINK_LIBS      | opencv_world460
+	OPENCV_LINK_PATHS     | C:\tools\opencv\build\x64\vc15\lib
+	OPENCV_PATH           | C:\tools\opencv
+	
+5. abrir Clion, dirigirte a setting y luego a toolchain 
+   (obligatorio que el compilador sea visual studio y no mingw) 
+   visual debe tener la configuración siguiente:
+   architecture: amd64
+   
+6. estando en settings te diriges a plugins y buscas cmake:
+   descargas el plugin cmake simple highlighter 
+   
+7. crear el proyecto de tu elección y poner la sigueinte configuración en el cmake (exmple): 
+
+	cmake_minimum_required(VERSION 3.23)
+	project(solution)
+	
+	set(CMAKE_CXX_STANDARD 23)
+	set(ENV{OPENCV_DIR} "C:\\tools\\opencv\\build")
+	set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+	
+	#set(OpenCV_STATIC ON)
+	find_package(OpenCV REQUIRED)
+	include_directories(${OpenCV_INCLUDE_DIRS})
+	
+	add_executable(solution main.cpp)
+	
+	set(OpenCV_LIBS opencv_core opencv_imgproc opencv_highgui opencv_imgcodecs)
+	target_link_libraries(solution ${OpenCV_LIBS})
+
+
+8. en visual studio solo creas un proyecto y cambias el debug por reléase y x86 por x64
+9. creas un proyecto en c++ 
+10. te diriges al nombre del proyecto y click derecho/propiedades/aditional include directories/edit 
+11. agreas la direccion C:/tools/opencv/build/include y C:/tools/opencv/build/include/opencv2, le das aceptar, aplicar
+12. te diriges a linker/aditional library directories/edit 
+13. agregar C:\tools\opencv\build\x64\vc15 and C:\tools\opencv\build\x64\vc14, le das aceptar, aplicar 
+14. te diriges a input aditional dependencias/edit
+15. agregas opencv_core2413.lib and opencv_highgui2413.lib, aceptar y aplcar 
+
+
+
+
+
+

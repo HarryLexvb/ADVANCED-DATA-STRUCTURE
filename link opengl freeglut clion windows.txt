@@ -1,0 +1,26 @@
+referencia: https://www.youtube.com/watch?v=Yf5CTt_8CaM 
+
+https://freeglut.sourceforge.net/ -> es una version alternativa a OPENGL
+ir a descargar, luego dirigirse a Pre-Compiled Packages
+hacer click en  Martin Payne's Windows binaries (MSVC and MinGW)
+elegir  y descargar 
+extraer y copiar los 3 archivos en mimgw 
+
+
+en el cmake poner esto 
+
+cmake_minimum_required(VERSION 3.23)
+project(ZOrdeCurve3D)
+
+set(CMAKE_CXX_STANDARD 23)
+
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
+
+add_executable(ZOrdeCurve3D main.cpp)
+
+target_link_libraries(ZOrdeCurve3D ${OPENGL_LIBRARIES})
+target_link_libraries(ZOrdeCurve3D ${GLUT_LIBRARY})
+target_link_libraries(ZOrdeCurve3D -lopengl32 -g -lfreeglut)
+
+
